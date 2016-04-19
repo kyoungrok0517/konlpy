@@ -4,8 +4,6 @@
 from __future__ import unicode_literals
 import re
 
-import jpype
-
 from .. import jvm
 from .. import utils
 
@@ -98,11 +96,8 @@ class Hannanum():
 
         return [s for s, t in self.pos(phrase)]
 
-    def __init__(self, jvmpath=None):
-        if not jpype.isJVMStarted():
-            jvm.init_jvm(jvmpath)
+    def __init__(self):
+        jvm.init_jvm()
 
-        jhannanumJavaPackage = jpype.JPackage('kr.lucypark.jhannanum.comm')
-        HannanumInterfaceJavaClass = jhannanumJavaPackage.HannanumInterface
-        self.jhi = HannanumInterfaceJavaClass()  # Java instance
+        self.jhi = jvm.get_jvm().kr.lucypark.jhannanum.comm.HannanumInterface()
         self.tagset = utils.read_json('%s/data/tagset/hannanum.json' % utils.installpath)

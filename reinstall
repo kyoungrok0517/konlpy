@@ -5,4 +5,4 @@ rm -rf dist
 rm -rf konlpy.egg-info
 rm -rf /usr/local/lib/python2.7/dist-packages/konlpy-*
 python setup.py install
-python3 setup.py install
+#python3 setup.py install

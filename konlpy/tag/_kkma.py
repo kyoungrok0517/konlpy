@@ -3,8 +3,6 @@
 
 import re
 
-import jpype
-
 from .. import jvm
 from .. import utils
 
@@ -82,11 +80,8 @@ class Kkma():
         if not sentences: return []
         return [sentences.get(i).getSentence() for i in range(sentences.size())]
 
-    def __init__(self, jvmpath=None):
-        if not jpype.isJVMStarted():
-            jvm.init_jvm(jvmpath)
+    def __init__(self):
+        jvm.init_jvm()
 
-        kkmaJavaPackage = jpype.JPackage('kr.lucypark.kkma')
-        KkmaInterfaceJavaClass = kkmaJavaPackage.KkmaInterface
-        self.jki = KkmaInterfaceJavaClass()  # Java instance
+        self.jki = jvm.get_jvm().kr.lucypark.kkma.KkmaInterface()
         self.tagset = utils.read_json('%s/data/tagset/kkma.json' % utils.installpath)

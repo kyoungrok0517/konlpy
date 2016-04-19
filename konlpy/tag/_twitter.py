@@ -1,8 +1,6 @@
 #! /usr/bin/python2.7
 # -*- coding: utf-8 -*-
 
-import jpype
-
 from .. import jvm
 from .. import utils
 
@@ -47,8 +45,8 @@ class Twitter():
 
         tokens = self.jki.tokenize(
                     phrase,
-                    jpype.java.lang.Boolean(norm),
-                    jpype.java.lang.Boolean(stem)).toArray()
+                    jvm.get_jvm().java.lang.Boolean(norm),
+                    jvm.get_jvm().java.lang.Boolean(stem)).toArray()
         return [tuple(t.rsplit('/', 1)) for t in tokens]
 
     def nouns(self, phrase):
@@ -67,11 +65,8 @@ class Twitter():
 
         return [p for p in self.jki.phrases(phrase).toArray()]
 
-    def __init__(self, jvmpath=None):
-        if not jpype.isJVMStarted():
-            jvm.init_jvm(jvmpath)
+    def __init__(self):
+        jvm.init_jvm()
 
-        tktJavaPackage = jpype.JPackage('kr.lucypark.tkt')
-        TktInterfaceJavaClass = tktJavaPackage.TktInterface
-        self.jki = TktInterfaceJavaClass()
+        self.jki = jvm.get_jvm().kr.lucypark.tkt.TktInterface()
         self.tagset = utils.read_json('%s/data/tagset/twitter.json' % utils.installpath)

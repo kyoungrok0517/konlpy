@@ -104,12 +104,6 @@ msgstr ""
 msgid "Initializes the Java virtual machine (JVM)."
 msgstr ""
 
-#: ../../../konlpy/jvm.pydocstring of konlpy.jvm.init_jvm:3
-msgid ""
-"The path of the JVM. If left empty, inferred by "
-":py:func:`jpype.getDefaultJVMPath`."
-msgstr ""
-
 #: ../../api/konlpy.rst:37
 msgid ":mod:`utils` Module"
 msgstr ""

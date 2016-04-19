@@ -5,8 +5,6 @@ import os
 import re
 import sys
 
-import jpype
-
 from .. import jvm
 from .. import utils
 from .. import internals
@@ -72,13 +70,11 @@ class Komoran():
 
         return [s for s, t in self.pos(phrase)]
 
-    def __init__(self, jvmpath=None, dicpath=None):
-        if not jpype.isJVMStarted():
-            jvm.init_jvm(jvmpath)
-        komoranJavaPackage = jpype.JPackage('kr.lucypark.komoran')
-        KomoranInterfaceJavaClass = komoranJavaPackage.KomoranInterface
+    def __init__(self, dicpath=None):
+        jvm.init_jvm()
+
         try:
-            self.jki = KomoranInterfaceJavaClass()
+            self.jki = jvm.get_jvm().kr.lucypark.komoran.KomoranInterface()
         except TypeError:  # Package kr.lucypark.komoran.KomoranInterface is not Callable
             raise IOError("Cannot access komoran-dic. Please leave an issue at https://github.com/konlpy/konlpy/issues")
 

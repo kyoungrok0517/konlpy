@@ -115,12 +115,12 @@ Windows
 
 2. Do you have a Java of version 1.7 or above installed, that matches your OS bit version? If not, `download and install a JDK <http://www.oracle.com/technetwork/java/javase/downloads/index.html>`_. Note again, that the bit versions must match.
 3. Set `JAVA_HOME <http://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/index.html>`_.
-4. Download and install the `JPype1 (>=0.5.7) <http://www.lfd.uci.edu/~gohlke/pythonlibs/#jpype>`_ that matches your bit version: `win32` for 32 bit and `win-amd64` for 64 bit. You may have to `upgrade your pip <https://pip.pypa.io/en/stable/installing.html#upgrade-pip>`_ in order to install the downloaded `.whl` file.
+4. Download and install the `py4j`
 
     .. sourcecode:: guess
 
         > pip install --upgrade pip
-        > pip install JPype1-0.5.7-cp27-none-win_amd64.whl
+        > pip install py4j
 
 5. From the command prompt, install KoNLPy.
 
