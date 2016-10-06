@@ -1,6 +1,7 @@
 #! /usr/bin/python
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import logging
 import os
 import sys
@@ -62,9 +63,9 @@ def init_jvm():
     #     '-cp', classpath,
     #     '-Dfile.encoding=UTF8',
     #     '-ea', '-Xmx768m',
-    #     'kr.lucypark.py4j.KonlpyGateway']);
+    #     'kr.lucypark.py4j.KonlpyGateway'])
 
-    print "Initializing JAVA frameworks..."
+    print("Initializing JAVA frameworks...")
     time.sleep(1)
     jvm_e = None
     for i in range(0, 10):
@@ -73,20 +74,20 @@ def init_jvm():
             gateway = JavaGateway(gateway_parameters=GatewayParameters(port=port))
         except Exception as e:
             gateway = None
-            jvm_e = e;
+            jvm_e = e
             continue
         break
     if gateway == None:
         if jvm_e != None:
             raise jvm_e
-        raise JvmError("Could not connect to JVM. unknown error");
+        raise JvmError("Could not connect to JVM. unknown error")
 
-    print "JAVA frameworks initialized."
-    atexit.register(shutdown_jvm);
+    print("JAVA frameworks initialized.")
+    atexit.register(shutdown_jvm)
 
 def get_jvm():
     global gateway
     if gateway != None:
         return gateway.jvm
 
-    return None;
+    return None
